@@ -28,18 +28,24 @@ own code and progress are kept local and gitignored.
 - `problems/<categorySlug>/<id>.md` — paraphrased problem statements (committed,
   shared). Authored lazily: if a problem's file is missing when the learner reaches
   it, write it first, then present it.
-- `solutions/<categorySlug>/<id>.<ext>` — the learner's code. **Gitignored.**
+- `solutions/<categorySlug>/<id>/` — a dedicated directory per problem, created when
+  the problem is started. Holds the solution file (`solution.py` / `solution.js` /
+  `solution.ts` / `Solution.java`) and, for Python, a `.venv/`. **Gitignored.**
 - `progress/progress.json` — the learner's progress. **Gitignored.** Create it on
   first use if absent.
 
-## Language → extension / run command
+## Per-problem directory
 
-| Language    | ext   | run                                                        |
-|-------------|-------|------------------------------------------------------------|
-| Python      | `.py` | `python3 solutions/<cat>/<id>.py`                          |
-| JavaScript  | `.js` | `node solutions/<cat>/<id>.js`                             |
-| TypeScript  | `.ts` | `npx ts-node solutions/<cat>/<id>.ts` (or `tsc` + `node`) |
-| Java        | `.java`| `cd solutions/<cat> && javac <Id>.java && java <Id>`      |
+When a problem is started, create `solutions/<categorySlug>/<id>/` (`mkdir -p`) and
+put the solution file inside it. For **Python**, also create a virtual environment in
+that directory: `python3 -m venv solutions/<categorySlug>/<id>/.venv`.
+
+| Language    | file            | run (from repo root)                                          |
+|-------------|-----------------|---------------------------------------------------------------|
+| Python      | `solution.py`   | `solutions/<cat>/<id>/.venv/bin/python solutions/<cat>/<id>/solution.py` |
+| JavaScript  | `solution.js`   | `node solutions/<cat>/<id>/solution.js`                       |
+| TypeScript  | `solution.ts`   | `npx ts-node solutions/<cat>/<id>/solution.ts`               |
+| Java        | `Solution.java` | `cd solutions/<cat>/<id> && javac Solution.java && java Solution` |
 
 Scaffold each solution file with: a short header comment (title, difficulty, link),
 a function/method stub with the right signature, and a few example-based test asserts

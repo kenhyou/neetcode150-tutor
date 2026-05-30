@@ -46,12 +46,17 @@ When a problem starts, Claude will:
 
 ```
 data/neetcode150.json     # the 150-problem index (id, category, difficulty, links)
-problems/<category>/<id>.md   # paraphrased problem statements (shared)
-solutions/<category>/<id>.<ext>   # YOUR code        (gitignored)
+problems/<category>/<id>.md       # paraphrased problem statements (shared)
+solutions/<category>/<id>/        # YOUR per-problem directory   (gitignored)
+    solution.py | solution.js | solution.ts | Solution.java
+    .venv/                        # created for Python problems
 progress/progress.json    # YOUR progress           (gitignored)
 .claude/skills/           # the /practice and /progress skills
 CLAUDE.md                 # the tutor's behavior contract
 ```
+
+Each problem you start gets its own directory under `solutions/`. If you pick Python,
+a `.venv` is created inside it so dependencies stay isolated per problem.
 
 Problem statements are authored on first visit and committed, so the library fills
 in as people use the kit. The **Arrays & Hashing** category is pre-seeded so things

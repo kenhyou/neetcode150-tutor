@@ -45,25 +45,49 @@ Before any coding, ask 1–2 short clarifying questions to confirm the learner
 understands inputs, outputs, and edge cases. Then ask what approach they're thinking
 of. Do **not** volunteer the optimal approach yet.
 
-## Step 5 — Pick language & scaffold
+## Step 5 — Make the solution directory, pick language & scaffold
 
-Ask which language they want: **Python**, **JavaScript**, **TypeScript**, or **Java**
-(unless they already said). Then scaffold `solutions/<categorySlug>/<id>.<ext>`:
+**Always create a dedicated directory for this problem** the first time it's started:
 
+```
+solutions/<categorySlug>/<id>/
+```
+
+Use the Bash tool: `mkdir -p solutions/<categorySlug>/<id>`. If the directory
+already exists (the learner is resuming), reuse it. This whole tree is gitignored.
+
+Then ask which language they want: **Python**, **JavaScript**, **TypeScript**, or
+**Java** (unless they already said), and scaffold the solution file **inside** that
+directory:
+
+| Language   | file in the dir   | run (from repo root)                                          |
+|------------|-------------------|---------------------------------------------------------------|
+| Python     | `solution.py`     | `solutions/<cat>/<id>/.venv/bin/python solutions/<cat>/<id>/solution.py` |
+| JavaScript | `solution.js`     | `node solutions/<cat>/<id>/solution.js`                       |
+| TypeScript | `solution.ts`     | `npx ts-node solutions/<cat>/<id>/solution.ts`               |
+| Java       | `Solution.java`   | `cd solutions/<cat>/<id> && javac Solution.java && java Solution` |
+
+The scaffolded file should contain:
 - A header comment: title, difficulty, LeetCode link.
-- A function/method stub with the correct signature and a `TODO` body.
+- A function/method stub with the correct signature and a `TODO` body. (Java: a
+  `class Solution` with the method.)
 - A few example-based assertions derived from the statement so they can run-and-check.
 
-Extension/run map (also in `CLAUDE.md`):
+### Python → create a virtual environment
 
-| Language   | ext     | run                                                   |
-|------------|---------|-------------------------------------------------------|
-| Python     | `.py`   | `python3 <file>`                                      |
-| JavaScript | `.js`   | `node <file>`                                         |
-| TypeScript | `.ts`   | `npx ts-node <file>`                                  |
-| Java       | `.java` | `cd <dir> && javac <Id>.java && java <Id>`            |
+If the learner chose **Python**, create a venv inside the problem directory (skip if
+`.venv` is already there):
 
-(For Java, name the class/file in PascalCase, e.g. `TwoSum.java`.)
+```
+python3 -m venv solutions/<categorySlug>/<id>/.venv
+```
+
+Tell the learner how to use it:
+- Activate: `source solutions/<categorySlug>/<id>/.venv/bin/activate`
+- Or run directly without activating: `solutions/<categorySlug>/<id>/.venv/bin/python solutions/<categorySlug>/<id>/solution.py`
+
+Most NeetCode problems need only the standard library, so no `pip install` is
+required. If a particular problem needs a package, install it into this venv.
 
 Update the problem's progress record: set `status: "in_progress"`, `language`,
 `startedAt` (today, YYYY-MM-DD), and increment `attempts`.
