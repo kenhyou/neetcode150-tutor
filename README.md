@@ -67,3 +67,15 @@ work right away.
 The tutor is deliberately hints-first and will not dump the solution on you. If you
 want a guided walkthrough instead of the struggle, just say so at the start of a
 problem.
+
+## Disclaimer
+
+This is an unofficial, community study aid. It is **not affiliated with, endorsed by,
+or sponsored by** NeetCode or LeetCode. "NeetCode" and "LeetCode" are the property of
+their respective owners. The problem list references their problems for study
+purposes; problem statements in this repo are paraphrased in our own words, and each
+links to the original on LeetCode.
+
+## License
+
+Released under the [MIT License](LICENSE).
